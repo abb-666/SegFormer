@@ -6,11 +6,11 @@ _base_ = [
 ]
 
 # model settings
-norm_cfg = dict(type='SyncBN', requires_grad=True)
+norm_cfg = dict(type='BN', requires_grad=True)
 find_unused_parameters = True
 model = dict(
     type='EncoderDecoder',
-    pretrained='pretrained/mit_b1.pth',
+    pretrained='pretrained/segformer_b1_backbone_weights.pth',
     backbone=dict(
         type='mit_b1',
         style='pytorch'),
@@ -44,5 +44,5 @@ lr_config = dict(_delete_=True, policy='poly',
                  power=1.0, min_lr=0.0, by_epoch=False)
 
 
-data = dict(samples_per_gpu=2)
-evaluation = dict(interval=16000, metric='mIoU')
+data = dict(samples_per_gpu=16)
+evaluation = dict(interval=4000, metric='mIoU')
